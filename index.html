@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bubu</title>
+  <style>
+    :root {
+      --bg: #14120f;
+      --fg: #f3efe6;
+      --muted: #a39a8c;
+      --line: #2c2924;
+      --accent: #e8a54b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--fg);
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, #2a2418 0%, transparent 55%),
+        var(--bg);
+    }
+    main { width: min(28rem, 100%); text-align: center; }
+    .brand {
+      margin: 0;
+      font-size: clamp(2.75rem, 8vw, 3.75rem);
+      font-weight: 650;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .tag {
+      margin: 0.85rem 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.45;
+    }
+    .meta {
+      margin: 1.75rem 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1.25rem;
+      min-height: 2.85rem;
+      padding: 0 1.35rem;
+      border-radius: 0.55rem;
+      background: var(--accent);
+      color: #1a140a;
+      font: inherit;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 120ms ease, filter 120ms ease;
+    }
+    .cta:hover { filter: brightness(1.06); transform: translateY(-1px); }
+    .cta:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+    .note {
+      margin: 1.5rem 0 0;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+    a.quiet { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 class="brand">Bubu</h1>
+    <p class="tag">Windows 桌面编程助手。下载安装包，解压即可运行。</p>
+    <p class="meta" id="meta">最新版本</p>
+    <a class="cta" id="download" href="https://github.com/BranchCrypto/bbu-releases/releases/latest/download/bbu-windows.zip">下载 Windows 版</a>
+    <p class="note">
+      要求 Windows 10/11。
+      <a class="quiet" href="https://github.com/BranchCrypto/bbu-releases/releases">所有版本</a>
+    </p>
+  </main>
+  <script>
+    fetch('https://api.github.com/repos/BranchCrypto/bbu-releases/releases/latest')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!data || !data.tag_name) return
+        document.getElementById('meta').textContent = '当前版本 ' + data.tag_name
+        const asset = (data.assets || []).find((a) => a.name === 'bbu-windows.zip')
+        if (asset && asset.browser_download_url) {
+          document.getElementById('download').href = asset.browser_download_url
+        }
+      })
+      .catch(() => {})
+  </script>
+</body>
+</html>
