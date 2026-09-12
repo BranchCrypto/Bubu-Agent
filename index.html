@@ -4,137 +4,283 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bubu Agent</title>
-  <meta name="description" content="Bubu Agent — 让花成花，让树成树，让时间属于你。" />
+  <meta name="description" content="Bubu Agent" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --fg: #000;
-      --muted: rgba(0, 0, 0, 0.75);
-      --label: #7f7f7f;
-      --bg: #fff;
-      --chip: #000;
-      --chip-fg: #fff;
+      --bg0: #1a0a3a;
+      --bg1: #12081f;
+      --bg2: #050508;
+      --fg: #ffffff;
+      --muted: rgba(255, 255, 255, 0.62);
+      --line: rgba(255, 255, 255, 0.14);
+      --chip: #ffffff;
+      --chip-fg: #0b0614;
+      --ghost: rgba(255, 255, 255, 0.08);
     }
+
     * { box-sizing: border-box; }
     html, body { margin: 0; min-height: 100%; }
     body {
-      display: grid;
-      place-items: center;
-      padding: 48px 24px;
-      background: var(--bg);
+      min-height: 100dvh;
       color: var(--fg);
       font-family: Geist, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-      font-size: 12px;
       font-weight: 500;
-      line-height: 1.2;
+      background:
+        radial-gradient(ellipse 70% 80% at 12% 50%, #6b3cff 0%, transparent 58%),
+        radial-gradient(ellipse 50% 60% at 35% 40%, #3a1890 0%, transparent 55%),
+        linear-gradient(105deg, var(--bg0) 0%, var(--bg1) 42%, var(--bg2) 78%);
       -webkit-font-smoothing: antialiased;
     }
-    main { width: min(340px, 100%); }
-    h1 {
-      margin: 0 0 10px;
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 1.2;
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(240px, 0.9fr) minmax(320px, 1.2fr);
+      align-items: center;
+      gap: clamp(1.5rem, 4vw, 3.5rem);
+      min-height: 100dvh;
+      padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 4rem);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 40vh;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 5.5vw, 4.25rem);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
       text-wrap: balance;
+      color: var(--fg);
     }
-    .lede, .body {
-      margin: 0 0 10px;
-      color: var(--muted);
-      max-width: 36em;
-      text-wrap: pretty;
+
+    .downloads {
+      width: min(100%, 22rem);
+      margin-top: 2.75rem;
+      text-align: left;
     }
-    .body { margin-bottom: 28px; }
-    section + section { margin-top: 22px; }
+
     .section-label {
-      margin: 0 0 10px;
-      color: var(--label);
+      margin: 0 0 0.65rem;
+      color: var(--muted);
+      font-size: 0.78rem;
     }
+
+    .section-label + .rows { margin-bottom: 1.25rem; }
+
     .rows {
       display: grid;
-      gap: 8px;
+      gap: 0.55rem;
       margin: 0;
       padding: 0;
       list-style: none;
     }
+
     .rows li {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      min-height: 20px;
+      gap: 1rem;
+      min-height: 2rem;
     }
-    .rows span { color: var(--fg); flex: 1 1 auto; }
+
+    .rows span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
     .chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex: 0 0 auto;
-      min-height: 20px;
-      padding: 2px 5px;
-      margin: -10px 0;
+      min-height: 1.7rem;
+      padding: 0.2rem 0.55rem;
+      border: 1px solid transparent;
       background: var(--chip);
       color: var(--chip-fg);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
       text-decoration: none;
       white-space: nowrap;
-      border-radius: 0;
-      transition: opacity 120ms ease;
+      border-radius: 0.35rem;
+      transition: opacity 140ms ease, transform 140ms ease;
     }
-    .chip:hover { opacity: 0.82; }
+
+    .chip.ghost {
+      background: var(--ghost);
+      color: var(--fg);
+      border-color: var(--line);
+      font-weight: 500;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .chip:hover { opacity: 0.9; }
+      .chip:active { transform: scale(0.98); }
+    }
+
     .chip:focus-visible {
+      outline: 2px solid var(--fg);
+      outline-offset: 3px;
+    }
+
+    .stage {
+      position: relative;
+      min-width: 0;
+    }
+
+    .frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      background: #0c0c0e;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.06);
+      aspect-ratio: 16 / 10;
+    }
+
+    .frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+      opacity: 0;
+      transition: opacity 280ms ease;
+      pointer-events: none;
+    }
+
+    .frame img.is-active { opacity: 1; }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      justify-content: flex-end;
+      margin-top: 0.9rem;
+    }
+
+    .tabs button {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--ghost);
+      color: var(--muted);
+      font: inherit;
+      font-size: 0.75rem;
+      min-height: 2rem;
+      padding: 0 0.75rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: color 140ms ease, background-color 140ms ease, border-color 140ms ease;
+    }
+
+    .tabs button.is-active {
+      color: var(--fg);
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .tabs button:focus-visible {
       outline: 2px solid var(--fg);
       outline-offset: 2px;
     }
+
     @media (prefers-reduced-motion: reduce) {
-      .chip { transition: none; }
+      .chip, .frame img, .tabs button { transition: none; }
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+      .brand { min-height: auto; }
+      .downloads { width: 100%; }
+      .tabs { justify-content: center; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Bubu Agent</h1>
-    <p class="lede">让花成花，让树成树，让时间属于你。</p>
-    <p class="body">面向企业里真正干活的团队，帮你把日常工作顺利推进下去。项目仍在快速迭代。</p>
-
-    <section aria-labelledby="personal">
-      <p class="section-label" id="personal">个人版:</p>
-      <ul class="rows">
-        <li>
-          <span>Windows:</span>
-          <a class="chip" id="download" href="https://github.com/BranchCrypto/Bubu-Agent/releases/latest/download/bbu-windows.zip">获取安装包</a>
-        </li>
-        <li>
-          <span>当前版本:</span>
-          <a class="chip" id="version" href="https://github.com/BranchCrypto/Bubu-Agent/releases/latest">最新版</a>
-        </li>
-      </ul>
+  <main class="hero">
+    <section class="brand" aria-label="Bubu Agent">
+      <h1>Bubu Agent</h1>
+      <div class="downloads">
+        <p class="section-label">个人版</p>
+        <ul class="rows">
+          <li>
+            <span>Windows</span>
+            <a class="chip" id="download" href="https://github.com/BranchCrypto/Bubu-Agent/releases/latest/download/bbu-windows.zip">获取安装包</a>
+          </li>
+          <li>
+            <span>当前版本</span>
+            <a class="chip ghost" id="version" href="https://github.com/BranchCrypto/Bubu-Agent/releases/latest">最新版</a>
+          </li>
+        </ul>
+        <p class="section-label">企业版</p>
+        <ul class="rows">
+          <li>
+            <span>请联系我</span>
+            <a class="chip ghost" href="mailto:branchweb3@gmail.com">branchweb3@gmail.com</a>
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <section aria-labelledby="enterprise">
-      <p class="section-label" id="enterprise">企业版:</p>
-      <ul class="rows">
-        <li>
-          <span>请联系我:</span>
-          <a class="chip" href="mailto:branchweb3@gmail.com">branchweb3@gmail.com</a>
-        </li>
-      </ul>
+    <section class="stage" aria-label="产品预览">
+      <div class="frame" id="frame">
+        <img class="is-active" src="shots/home.png" alt="产品首页" data-shot="home" width="1600" height="1000" />
+        <img src="shots/docs.png" alt="文档编辑" data-shot="docs" width="1600" height="1000" />
+        <img src="shots/code.png" alt="代码编辑" data-shot="code" width="1600" height="1000" />
+      </div>
+      <div class="tabs" role="tablist" aria-label="预览切换">
+        <button type="button" class="is-active" role="tab" aria-selected="true" data-shot="home">首页</button>
+        <button type="button" role="tab" aria-selected="false" data-shot="docs">文档</button>
+        <button type="button" role="tab" aria-selected="false" data-shot="code">代码</button>
+      </div>
     </section>
   </main>
+
   <script>
-    fetch('https://api.github.com/repos/BranchCrypto/Bubu-Agent/releases/latest')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => {
-        if (!data || !data.tag_name) return
-        const version = document.getElementById('version')
-        version.textContent = data.tag_name
-        version.href = data.html_url || version.href
-        const asset = (data.assets || []).find((a) => a.name === 'bbu-windows.zip')
-        if (asset && asset.browser_download_url) {
-          document.getElementById('download').href = asset.browser_download_url
-        }
-      })
-      .catch(() => {})
+    (function () {
+      const imgs = Array.from(document.querySelectorAll('.frame img'))
+      const tabs = Array.from(document.querySelectorAll('.tabs button'))
+      function show(shot) {
+        imgs.forEach((img) => img.classList.toggle('is-active', img.dataset.shot === shot))
+        tabs.forEach((tab) => {
+          const on = tab.dataset.shot === shot
+          tab.classList.toggle('is-active', on)
+          tab.setAttribute('aria-selected', on ? 'true' : 'false')
+        })
+      }
+      tabs.forEach((tab) => tab.addEventListener('click', () => show(tab.dataset.shot)))
+
+      fetch('https://api.github.com/repos/BranchCrypto/Bubu-Agent/releases/latest')
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          if (!data || !data.tag_name) return
+          const version = document.getElementById('version')
+          version.textContent = data.tag_name
+          version.href = data.html_url || version.href
+          const asset = (data.assets || []).find((a) => a.name === 'bbu-windows.zip')
+          if (asset && asset.browser_download_url) {
+            document.getElementById('download').href = asset.browser_download_url
+          }
+        })
+        .catch(() => {})
+    })()
   </script>
 </body>
 </html>
