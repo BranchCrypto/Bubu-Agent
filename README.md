@@ -1,14 +1,14 @@
-# Bubu downloads
+# Bubu Agent
 
-Windows installers for Bubu.
+Windows installers for Bubu Agent.
 
 ## Download
 
-**Latest:** https://github.com/BranchCrypto/bbu-releases/releases/latest/download/bbu-windows.zip
+**Latest:** https://github.com/BranchCrypto/Bubu-Agent/releases/latest/download/bbu-windows.zip
 
-All versions: https://github.com/BranchCrypto/bbu-releases/releases
+All versions: https://github.com/BranchCrypto/Bubu-Agent/releases
 
-Download page (GitHub Pages): https://branchcrypto.github.io/bbu-releases/
+Download page: https://branchcrypto.github.io/Bubu-Agent/
 
 ## Install
 
