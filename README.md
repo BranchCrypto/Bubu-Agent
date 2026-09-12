@@ -1,6 +1,6 @@
 # Bubu downloads
 
-Public Windows installers for [Bubu](https://github.com/BranchCrypto/bbu). Source code stays in a private repo.
+Windows installers for Bubu.
 
 ## Download
 
