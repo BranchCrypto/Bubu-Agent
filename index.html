@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bubu</title>
-  <meta name="description" content="Bubu — Windows desktop coding agent. Download the latest release." />
+  <title>Bubu Agent</title>
+  <meta name="description" content="Bubu Agent — 让花成花，让树成树，让时间属于你。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -62,7 +62,7 @@
     .body {
       margin: 0 0 10px;
       color: var(--muted);
-      max-width: 34em;
+      max-width: 36em;
     }
 
     .tags {
@@ -128,28 +128,24 @@
       <path d="M5 9h8M9 5v8" stroke="currentColor" stroke-width="1.5" />
     </svg>
 
-    <h1>Bubu</h1>
-    <p class="lede">Windows 桌面编程助手。</p>
-    <p class="body">下载安装包，解压后运行即可。在设置里填入 LLM API Key 开始对话。</p>
-    <p class="tags">Windows 10/11 \ Desktop agent \ Single binary</p>
+    <h1>Bubu Agent</h1>
+    <p class="lede">让花成花，让树成树，让时间属于你。</p>
+    <p class="body">面向企业里真正干活的团队，帮你把日常工作顺利推进下去。项目仍在快速迭代。</p>
+    <p class="tags">办公文件 \ 长时间任务 \ 全程可控 \ 记得你的习惯 \ 省而稳</p>
 
-    <p class="section-label">Important Links:</p>
+    <p class="section-label">下载:</p>
     <ul class="links">
       <li>
-        <span>Download:</span>
-        <a class="chip" id="download" href="https://github.com/BranchCrypto/bbu-releases/releases/latest/download/bbu-windows.zip">bbu-windows.zip</a>
+        <span>Windows:</span>
+        <a class="chip" id="download" href="https://github.com/BranchCrypto/bbu-releases/releases/latest/download/bbu-windows.zip">获取安装包</a>
       </li>
       <li>
-        <span>Version:</span>
-        <a class="chip" id="version" href="https://github.com/BranchCrypto/bbu-releases/releases/latest">latest</a>
+        <span>当前版本:</span>
+        <a class="chip" id="version" href="https://github.com/BranchCrypto/bbu-releases/releases/latest">最新版</a>
       </li>
       <li>
-        <span>All releases:</span>
-        <a class="chip" href="https://github.com/BranchCrypto/bbu-releases/releases">Releases</a>
-      </li>
-      <li>
-        <span>Checksum:</span>
-        <a class="chip" href="https://github.com/BranchCrypto/bbu-releases/releases/latest/download/SHA256SUMS">SHA256SUMS</a>
+        <span>历史版本:</span>
+        <a class="chip" href="https://github.com/BranchCrypto/bbu-releases/releases">查看全部</a>
       </li>
     </ul>
   </main>
@@ -164,10 +160,6 @@
         const asset = (data.assets || []).find((a) => a.name === 'bbu-windows.zip')
         if (asset && asset.browser_download_url) {
           document.getElementById('download').href = asset.browser_download_url
-        }
-        const sums = (data.assets || []).find((a) => a.name === 'SHA256SUMS')
-        if (sums && sums.browser_download_url) {
-          document.querySelector('a[href*="SHA256SUMS"]').href = sums.browser_download_url
         }
       })
       .catch(() => {})
