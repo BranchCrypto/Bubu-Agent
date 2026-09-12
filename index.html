@@ -4,28 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bubu Agent</title>
-  <meta name="description" content="Bubu Agent ? ?????????????????" />
+  <meta name="description" content="Bubu Agent — 让花成花，让树成树，让时间属于你。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@500&display=swap" rel="stylesheet" />
   <style>
     :root {
       --fg: #000;
       --muted: rgba(0, 0, 0, 0.75);
-      --faint: rgba(0, 0, 0, 0.5);
       --label: #7f7f7f;
       --bg: #fff;
       --chip: #000;
       --chip-fg: #fff;
     }
-
     * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      min-height: 100%;
-    }
-
+    html, body { margin: 0; min-height: 100%; }
     body {
       display: grid;
       place-items: center;
@@ -38,70 +31,49 @@
       line-height: 1.2;
       -webkit-font-smoothing: antialiased;
     }
-
-    main {
-      width: min(340px, 100%);
-    }
-
-    .mark {
-      display: block;
-      width: 18px;
-      height: 18px;
-      margin-bottom: 18px;
-      color: var(--fg);
-    }
-
+    main { width: min(340px, 100%); }
     h1 {
       margin: 0 0 10px;
       font-size: 12px;
       font-weight: 500;
       line-height: 1.2;
+      text-wrap: balance;
     }
-
-    .lede,
-    .body {
+    .lede, .body {
       margin: 0 0 10px;
       color: var(--muted);
       max-width: 36em;
+      text-wrap: pretty;
     }
-
-    .tags {
-      margin: 0 0 28px;
-      color: var(--faint);
-    }
-
+    .body { margin-bottom: 28px; }
+    section + section { margin-top: 22px; }
     .section-label {
       margin: 0 0 10px;
       color: var(--label);
     }
-
-    .links {
+    .rows {
       display: grid;
       gap: 8px;
       margin: 0;
       padding: 0;
       list-style: none;
     }
-
-    .links li {
+    .rows li {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
       min-height: 20px;
     }
-
-    .links span {
-      color: var(--fg);
-      flex: 1 1 auto;
-    }
-
+    .rows span { color: var(--fg); flex: 1 1 auto; }
     .chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex: 0 0 auto;
+      min-height: 20px;
       padding: 2px 5px;
+      margin: -10px 0;
       background: var(--chip);
       color: var(--chip-fg);
       text-decoration: none;
@@ -109,13 +81,11 @@
       border-radius: 0;
       transition: opacity 120ms ease;
     }
-
     .chip:hover { opacity: 0.82; }
     .chip:focus-visible {
       outline: 2px solid var(--fg);
       outline-offset: 2px;
     }
-
     @media (prefers-reduced-motion: reduce) {
       .chip { transition: none; }
     }
@@ -123,31 +93,33 @@
 </head>
 <body>
   <main>
-    <svg class="mark" viewBox="0 0 18 18" aria-hidden="true">
-      <rect x="1" y="1" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" />
-      <path d="M5 9h8M9 5v8" stroke="currentColor" stroke-width="1.5" />
-    </svg>
-
     <h1>Bubu Agent</h1>
-    <p class="lede">?????????????????</p>
-    <p class="body">????????????????????????????????????</p>
-    <p class="tags">???? \ ????? \ ???? \ ?????? \ ???</p>
+    <p class="lede">让花成花，让树成树，让时间属于你。</p>
+    <p class="body">面向企业里真正干活的团队，帮你把日常工作顺利推进下去。项目仍在快速迭代。</p>
 
-    <p class="section-label">??:</p>
-    <ul class="links">
-      <li>
-        <span>Windows:</span>
-        <a class="chip" id="download" href="https://github.com/BranchCrypto/Bubu-Agent/releases/latest/download/bbu-windows.zip">?????</a>
-      </li>
-      <li>
-        <span>????:</span>
-        <a class="chip" id="version" href="https://github.com/BranchCrypto/Bubu-Agent/releases/latest">???</a>
-      </li>
-      <li>
-        <span>????:</span>
-        <a class="chip" href="https://github.com/BranchCrypto/Bubu-Agent/releases">????</a>
-      </li>
-    </ul>
+    <section aria-labelledby="personal">
+      <p class="section-label" id="personal">个人版:</p>
+      <ul class="rows">
+        <li>
+          <span>Windows:</span>
+          <a class="chip" id="download" href="https://github.com/BranchCrypto/Bubu-Agent/releases/latest/download/bbu-windows.zip">获取安装包</a>
+        </li>
+        <li>
+          <span>当前版本:</span>
+          <a class="chip" id="version" href="https://github.com/BranchCrypto/Bubu-Agent/releases/latest">最新版</a>
+        </li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="enterprise">
+      <p class="section-label" id="enterprise">企业版:</p>
+      <ul class="rows">
+        <li>
+          <span>请联系我:</span>
+          <a class="chip" href="mailto:branchweb3@gmail.com">branchweb3@gmail.com</a>
+        </li>
+      </ul>
+    </section>
   </main>
   <script>
     fetch('https://api.github.com/repos/BranchCrypto/Bubu-Agent/releases/latest')
